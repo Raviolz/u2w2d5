@@ -51,4 +51,33 @@ public class EmployeeService {
         return eRep.findById(id)
                 .orElseThrow(() -> new NotFoundEx("Dipendente con id " + id + " non trovato"));
     }
+
+    public Employee findByIdAndUpdate(UUID id, NewEmployeeDTO body) { // uso lo stesso anche se il nome non torna molto
+        Employee found = this.findById(id);
+
+        if (!found.getEmail().equals(body.email())) {
+            if (eRep.existsByEmail(body.email())) {
+                throw new AlreadyExistEx("L'email " + body.email() + " è già in uso");
+            }
+        }
+
+        if (!found.getUsername().equals(body.username())) {
+            if (eRep.existsByUsername(body.username())) {
+                throw new AlreadyExistEx("Username " + body.username() + " già in uso");
+            }
+        }
+
+        found.setUsername(body.username());
+        found.setName(body.name());
+        found.setSurname(body.surname());
+        found.setEmail(body.email());
+        found.setAvatar("https://ui-avatars.com/api/?name=" + body.name() + "+" + body.surname());
+
+        return eRep.save(found);
+    }
+
+    public void findByIdAndDelete(UUID id) {
+        Employee found = this.findById(id);
+        eRep.delete(found);
+    }
 }

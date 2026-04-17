@@ -36,4 +36,16 @@ public class TripController {
     public Trip findById(@PathVariable UUID id) {
         return tService.findById(id);
     }
+
+
+    @PutMapping("/{id}")
+    public Trip findByIdAndUpdate(@PathVariable UUID id, @RequestBody NewTripDTO body) {
+        return tService.findByIdAndUpdate(id, body);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void findByIdAndDelete(@PathVariable UUID id) {
+        tService.findByIdAndDelete(id);
+    }
 }

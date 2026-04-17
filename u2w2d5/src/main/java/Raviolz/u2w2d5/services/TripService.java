@@ -45,4 +45,17 @@ public class TripService {
                 .orElseThrow(() -> new NotFoundEx("Viaggio con id " + id + " non trovato"));
     }
 
+
+    public Trip findByIdAndUpdate(UUID id, NewTripDTO body) {
+        Trip found = this.findById(id);
+
+        found.setDestination(body.destination());
+        found.setTripDate(body.tripDate());
+        return tRep.save(found);
+    }
+
+    public void findByIdAndDelete(UUID id) {
+        Trip found = this.findById(id);
+        tRep.delete(found);
+    }
 }

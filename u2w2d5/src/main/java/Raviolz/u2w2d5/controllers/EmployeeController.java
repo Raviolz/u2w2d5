@@ -36,4 +36,15 @@ public class EmployeeController {
     public Employee getById(@PathVariable UUID employeeId) {
         return this.eService.findById(employeeId);
     }
+
+    @PutMapping("/{userId}")
+    public Employee getByIdAndUpdate(@PathVariable UUID userId, @RequestBody NewEmployeeDTO body) {
+        return this.eService.findByIdAndUpdate(userId, body);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void findByIdAndDelete(@PathVariable UUID id) {
+        eService.findByIdAndDelete(id);
+    }
 }
