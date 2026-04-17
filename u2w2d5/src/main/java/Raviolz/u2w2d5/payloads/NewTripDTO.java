@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public record NewTripDTO(
         @NotBlank(message = "La destinazione e' obbligatoria")
         String destination,
-        @NotNull(message = "La data del viaggio è obbligatoria")
+        @NotNull(message = "La data del viaggio e' obbligatoria")
         @FutureOrPresent(message = "Troppo tardi!")
         LocalDate tripDate
 ) {

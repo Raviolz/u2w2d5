@@ -41,14 +41,21 @@ public class Reservation {
         if (trip.getTripDate().isBefore(LocalDate.now())) {
             throw new ValidationEx("Troppo tardi per prenotarsi!");
         }
+        if (trip.getTripState() == TripState.CANCELLED) {
+            throw new ValidationEx("Non puoi prenotare un viaggio annullato");
+        }
 
-// TODO fare controlli nei setter se ho tempo
+        if (trip.getTripState() == TripState.COMPLETED) {
+            throw new ValidationEx("Non puoi prenotare un viaggio gia' completato");
+        }
+
+
         this.requestDate = LocalDate.now();
         this.notes = notes;
         this.employee = employee;
         this.trip = trip;
     }
-
+// TODO fare controlli nei setter se ho tempo
 }
 
 
