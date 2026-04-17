@@ -2,7 +2,9 @@ package Raviolz.u2w2d5.controllers;
 
 import Raviolz.u2w2d5.entities.Reservation;
 import Raviolz.u2w2d5.payloads.NewReservationDTO;
+import Raviolz.u2w2d5.payloads.UpdatedReservationDTO;
 import Raviolz.u2w2d5.services.ReservationService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ public class ReservationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation save(@RequestBody NewReservationDTO body) {
+    public Reservation save(@RequestBody @Valid NewReservationDTO body) {
         return rServ.save(body);
     }
 
@@ -34,7 +36,7 @@ public class ReservationController {
 
 
     @PutMapping("/{id}")
-    public Reservation findByIdAndUpdate(@PathVariable UUID id, @RequestBody NewReservationDTO body) {
+    public Reservation findByIdAndUpdate(@PathVariable UUID id, @RequestBody UpdatedReservationDTO body) {
         return rServ.findByIdAndUpdate(id, body);
     }
 

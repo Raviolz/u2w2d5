@@ -4,6 +4,7 @@ import Raviolz.u2w2d5.entities.Employee;
 import Raviolz.u2w2d5.exceptions.AlreadyExistEx;
 import Raviolz.u2w2d5.exceptions.NotFoundEx;
 import Raviolz.u2w2d5.payloads.NewEmployeeDTO;
+import Raviolz.u2w2d5.payloads.UpdatedEmployeeDTO;
 import Raviolz.u2w2d5.repositories.EmployeeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,7 +53,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new NotFoundEx("Dipendente con id " + id + " non trovato"));
     }
 
-    public Employee findByIdAndUpdate(UUID id, NewEmployeeDTO body) { // uso lo stesso anche se il nome non torna molto
+    public Employee findByIdAndUpdate(UUID id, UpdatedEmployeeDTO body) { // uso lo stesso anche se il nome non torna molto
         Employee found = this.findById(id);
 
         if (!found.getEmail().equals(body.email())) {

@@ -8,6 +8,7 @@ import Raviolz.u2w2d5.exceptions.AlreadyExistEx;
 import Raviolz.u2w2d5.exceptions.BadRequestEx;
 import Raviolz.u2w2d5.exceptions.NotFoundEx;
 import Raviolz.u2w2d5.payloads.NewReservationDTO;
+import Raviolz.u2w2d5.payloads.UpdatedReservationDTO;
 import Raviolz.u2w2d5.repositories.ReservationRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -64,7 +65,7 @@ public class ReservationService {
     }
 
 
-    public Reservation findByIdAndUpdate(UUID id, NewReservationDTO body) {
+    public Reservation findByIdAndUpdate(UUID id, UpdatedReservationDTO body) {
         Reservation found = this.findById(id);
 
         Employee foundEmployee = eServ.findById(body.employeeId());

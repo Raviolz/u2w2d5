@@ -4,6 +4,7 @@ import Raviolz.u2w2d5.entities.Trip;
 import Raviolz.u2w2d5.exceptions.AlreadyExistEx;
 import Raviolz.u2w2d5.exceptions.NotFoundEx;
 import Raviolz.u2w2d5.payloads.NewTripDTO;
+import Raviolz.u2w2d5.payloads.UpdatedTripDTO;
 import Raviolz.u2w2d5.repositories.TripRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,7 +47,7 @@ public class TripService {
     }
 
 
-    public Trip findByIdAndUpdate(UUID id, NewTripDTO body) {
+    public Trip findByIdAndUpdate(UUID id, UpdatedTripDTO body) {
         Trip found = this.findById(id);
 
         found.setDestination(body.destination());

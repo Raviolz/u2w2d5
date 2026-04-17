@@ -1,5 +1,6 @@
 package Raviolz.u2w2d5.entities;
 
+import Raviolz.u2w2d5.exceptions.ValidationEx;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,17 @@ public class Reservation {
     private Trip trip;
 
     public Reservation(String notes, Employee employee, Trip trip) {
+        if (employee == null) {
+            throw new ValidationEx("Per chi prenotiamo?");
+        }
+        if (trip == null) {
+            throw new ValidationEx("Per dove?");
+        }
+        if (trip.getTripDate().isBefore(LocalDate.now())) {
+            throw new ValidationEx("Troppo tardi per prenotarsi!");
+        }
+
+// TODO fare controlli nei setter se ho tempo
         this.requestDate = LocalDate.now();
         this.notes = notes;
         this.employee = employee;

@@ -1,5 +1,6 @@
 package Raviolz.u2w2d5.entities;
 
+import Raviolz.u2w2d5.exceptions.ValidationEx;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,19 @@ public class Employee {
 
 
     public Employee(String username, String name, String surname, String email) {
+        if (username == null || username.isBlank()) {
+            throw new ValidationEx("Username obbligatorio");
+        }
+        if (name == null || name.isBlank()) {
+            throw new ValidationEx("Nome obbligatorio");
+        }
+        if (surname == null || surname.isBlank()) {
+            throw new ValidationEx("Cognome obbligatorio");
+        }
+        if (email == null || email.isBlank()) {
+            throw new ValidationEx("Email obbligatoria");
+        }
+// TODO fare controlli nei setter se ho tempo
         this.username = username;
         this.name = name;
         this.surname = surname;

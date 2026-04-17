@@ -2,7 +2,9 @@ package Raviolz.u2w2d5.controllers;
 
 import Raviolz.u2w2d5.entities.Trip;
 import Raviolz.u2w2d5.payloads.NewTripDTO;
+import Raviolz.u2w2d5.payloads.UpdatedTripDTO;
 import Raviolz.u2w2d5.services.TripService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ public class TripController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Trip save(@RequestBody NewTripDTO body) {
+    public Trip save(@RequestBody @Valid NewTripDTO body) {
         return tService.save(body);
     }
 
@@ -39,7 +41,7 @@ public class TripController {
 
 
     @PutMapping("/{id}")
-    public Trip findByIdAndUpdate(@PathVariable UUID id, @RequestBody NewTripDTO body) {
+    public Trip findByIdAndUpdate(@PathVariable UUID id, @RequestBody @Valid UpdatedTripDTO body) {
         return tService.findByIdAndUpdate(id, body);
     }
 

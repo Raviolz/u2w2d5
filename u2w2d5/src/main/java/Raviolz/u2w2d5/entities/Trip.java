@@ -1,5 +1,6 @@
 package Raviolz.u2w2d5.entities;
 
+import Raviolz.u2w2d5.exceptions.ValidationEx;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,9 +28,18 @@ public class Trip {
     private TripState tripState;
 
     public Trip(String destination, LocalDate date) {
+        if (destination == null || destination.isBlank()) {
+            throw new ValidationEx("Destinazione obbligatoria");
+        }
+        if (date == null) {
+            throw new ValidationEx("Data del viaggio obbligatoria");
+        }
+        if (date.isBefore(LocalDate.now())) {
+            throw new ValidationEx("La data non puo' gia' esser passata");
+        }
         this.destination = destination;
         this.tripDate = date;
         this.tripState = TripState.SCHEDULED;
     }
-
+// TODO fare controlli nei setter se ho tempo
 }

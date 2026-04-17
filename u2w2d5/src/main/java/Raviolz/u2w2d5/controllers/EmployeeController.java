@@ -2,7 +2,9 @@ package Raviolz.u2w2d5.controllers;
 
 import Raviolz.u2w2d5.entities.Employee;
 import Raviolz.u2w2d5.payloads.NewEmployeeDTO;
+import Raviolz.u2w2d5.payloads.UpdatedEmployeeDTO;
 import Raviolz.u2w2d5.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee save(@RequestBody NewEmployeeDTO body) {
+    public Employee save(@RequestBody @Valid NewEmployeeDTO body) {
         return eService.save(body);
     }
 
@@ -38,7 +40,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{userId}")
-    public Employee getByIdAndUpdate(@PathVariable UUID userId, @RequestBody NewEmployeeDTO body) {
+    public Employee getByIdAndUpdate(@PathVariable UUID userId, @RequestBody UpdatedEmployeeDTO body) {
         return this.eService.findByIdAndUpdate(userId, body);
     }
 
