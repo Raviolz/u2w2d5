@@ -41,6 +41,9 @@ public class Employee {
         if (surname == null || surname.isBlank()) {
             throw new ValidationEx("Cognome obbligatorio");
         }
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new ValidationEx("Email non valida");
+        }
         if (email == null || email.isBlank()) {
             throw new ValidationEx("Email obbligatoria");
         }
