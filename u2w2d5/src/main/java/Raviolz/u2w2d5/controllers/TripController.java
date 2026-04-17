@@ -3,6 +3,7 @@ package Raviolz.u2w2d5.controllers;
 import Raviolz.u2w2d5.entities.Trip;
 import Raviolz.u2w2d5.payloads.NewTripDTO;
 import Raviolz.u2w2d5.payloads.UpdatedTripDTO;
+import Raviolz.u2w2d5.payloads.UpdatedTripStateDTO;
 import Raviolz.u2w2d5.services.TripService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -49,5 +50,11 @@ public class TripController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable UUID id) {
         tService.findByIdAndDelete(id);
+    }
+
+    @PatchMapping("/{id}/status")
+    public Trip findByIdAndUpdateState(@PathVariable UUID id,
+                                       @RequestBody @Valid UpdatedTripStateDTO body) {
+        return tService.findByIdAndUpdateState(id, body);
     }
 }

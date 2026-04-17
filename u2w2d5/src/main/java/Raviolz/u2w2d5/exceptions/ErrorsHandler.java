@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
 
@@ -52,4 +53,12 @@ public class ErrorsHandler {
                 LocalDateTime.now()
         );
     }
+
+    // per id non validi ecc
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        return new ErrorDTO("Parametro non valido: " + ex.getName(), LocalDateTime.now());
+    }
+
 }
