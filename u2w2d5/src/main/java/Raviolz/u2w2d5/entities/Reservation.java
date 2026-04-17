@@ -19,8 +19,8 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     private UUID id;
-    @Column(name = "application_date", nullable = false)
-    private LocalDate applicationDate;
+    @Column(name = "request_date", nullable = false)
+    private LocalDate requestDate; // RICORDO non data del viaggio.. faccio controllo poi su tripdate
     @Column(name = "notes", length = 200)
     private String notes;
     @ManyToOne
@@ -31,12 +31,12 @@ public class Reservation {
     private Trip trip;
 
     public Reservation(String notes, Employee employee, Trip trip) {
-        this.applicationDate = LocalDate.now();
+        this.requestDate = LocalDate.now();
         this.notes = notes;
         this.employee = employee;
         this.trip = trip;
     }
-    
+
 }
 
 

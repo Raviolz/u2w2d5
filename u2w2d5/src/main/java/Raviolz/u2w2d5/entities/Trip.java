@@ -18,7 +18,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     private UUID id;
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 100)
     private String destination;
     @Column(nullable = false)
     private LocalDate tripDate;
