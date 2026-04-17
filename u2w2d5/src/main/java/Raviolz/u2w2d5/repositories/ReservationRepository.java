@@ -22,5 +22,31 @@ public interface ReservationRepository extends JpaRepository<Reservation, UUID> 
             """)
     boolean existsByEmployeeAndTripDate(@Param("employee") Employee employee,
                                         @Param("tripDate") LocalDate tripDate);
+
+    // per update per non trovare se stessa nel db ...  <> diverso da
+    @Query("""  
+            SELECT COUNT(r) > 0
+            FROM Reservation r
+            WHERE r.employee = :employee
+            AND r.trip = :trip
+            AND r.id <> :reservationId
+            """)
+    boolean existsByEmployeeAndTripAndIdNot(@Param("employee") Employee employee,
+                                            @Param("trip") Trip trip,
+                                            @Param("reservationId") UUID reservationId);
+
+    @Query("""
+            SELECT COUNT(r) > 0
+            FROM Reservation r
+            WHERE r.employee = :employee
+            AND r.trip.tripDate = :tripDate
+            AND r.id <> :reservationId
+            """)
+    boolean existsByEmployeeAndTripDateAndIdNot(@Param("employee") Employee employee,
+                                                @Param("tripDate") LocalDate tripDate,
+                                                @Param("reservationId") UUID reservationId);
 }
+
+
+
 
