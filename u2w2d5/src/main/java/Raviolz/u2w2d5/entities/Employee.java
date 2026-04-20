@@ -2,7 +2,10 @@ package Raviolz.u2w2d5.entities;
 
 import Raviolz.u2w2d5.exceptions.ValidationEx;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -11,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
+
 
 @Table(name = "employees")
 public class Employee {
@@ -29,9 +32,11 @@ public class Employee {
     private String email;
     @Column(nullable = false)
     private String avatar;
+    @Column(nullable = false)
+    private String password;
 
 
-    public Employee(String username, String name, String surname, String email) {
+    public Employee(String username, String name, String surname, String email, String password) {
         if (username == null || username.isBlank()) {
             throw new ValidationEx("Username obbligatorio");
         }
@@ -53,5 +58,18 @@ public class Employee {
         this.surname = surname;
         this.email = email;
         this.avatar = "https://ui-avatars.com/api/?name=" + name + "+" + surname;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "avatar='" + avatar + '\'' +
+                ", email='" + email + '\'' +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

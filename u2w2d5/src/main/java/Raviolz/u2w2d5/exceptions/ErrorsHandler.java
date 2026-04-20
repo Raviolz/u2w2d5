@@ -61,4 +61,10 @@ public class ErrorsHandler {
         return new ErrorDTO("Parametro non valido: " + ex.getName(), LocalDateTime.now());
     }
 
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED) // 401
+    public ErrorDTO handleUnauthorizedEx(UnauthorizedException ex) {
+        return new ErrorDTO(ex.getMessage(), LocalDateTime.now());
+    }
+
 }
